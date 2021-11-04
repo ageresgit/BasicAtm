@@ -1,12 +1,24 @@
 package com.github.ageresgit.server;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.github.ageresgit.common.Request;
+import org.springframework.http.HttpEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class HelloController {
+
+    @GetMapping("/hello/{clientName}")
+    public String getHelloClient(@PathVariable("clientName") String clientName) {
+        return "Hello, dear " + clientName + "!";
+    }
+
     @GetMapping("/hello")
     public String getHello() {
-        return "Hello, dear User!";
+        return "Yo, man!";
+    }
+
+    @PostMapping("/balancerequest")
+    public String balanceRequestProcess(@RequestBody Request request) {
+        return "You send me card N" + request.getCardPan() + " and pin = " + request.getCardPan() + ". Thank YOU!";
     }
 }
