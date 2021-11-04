@@ -1,7 +1,6 @@
 package com.github.ageresgit.server;
 
 import com.github.ageresgit.common.Request;
-import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,6 +18,6 @@ public class HelloController {
 
     @PostMapping("/balancerequest")
     public String balanceRequestProcess(@RequestBody Request request) {
-        return "You send me card N" + request.getCardPan() + " and pin = " + request.getCardPan() + ". Thank YOU!";
+        return "You send me card N" + request.getCardPan() + " and pin = " + request.getCardPin() + ". Thank YOU!";
     }
 }
