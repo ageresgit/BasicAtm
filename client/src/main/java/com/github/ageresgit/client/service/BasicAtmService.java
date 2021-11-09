@@ -12,8 +12,8 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class BasicAtmService implements AtmService {
-    private long atmId;
-    private String remoteUrl;
+    private final long atmId;
+    private final String remoteUrl;
 
     public BasicAtmService(@Value("${atm.atmId}") long atmId, @Value("${atm.remote.url}") String remoteUrl) {
         this.atmId = atmId;
@@ -32,7 +32,7 @@ public class BasicAtmService implements AtmService {
         }
 
         RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<Request> request = new HttpEntity<>(new Request(RequestType.CARD_BALANCE, card.getPan(), card.getPin()));
+        HttpEntity<Request> request = new HttpEntity<>(new Request(RequestType.CARD_BALANCE, card.getPan(), card.getPin(), atmId));
 
         ResponseEntity<String> responseEntityStr = restTemplate.postForEntity(remoteUrl, request, String.class);
 
