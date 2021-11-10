@@ -2,8 +2,6 @@ DROP TABLE IF EXISTS PaymentCards;
 DROP TABLE IF EXISTS Accounts;
 DROP TABLE IF EXISTS Currency;
 
-
-
 CREATE TABLE Currency (
     id INT PRIMARY KEY,
     iso varchar(3) NOT NULL

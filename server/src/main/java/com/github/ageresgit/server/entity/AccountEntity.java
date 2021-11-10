@@ -19,7 +19,7 @@ public class AccountEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "currency", referencedColumnName = "id")
-    private CurrencyEntity currency;
+    private CurrencyEntity iso;
 
     @Column(name = "balance")
     private BigDecimal balance;

@@ -1,12 +1,10 @@
 package com.github.ageresgit.server.controller;
 
 import com.github.ageresgit.common.Request;
-import com.github.ageresgit.server.service.CardService;
+import com.github.ageresgit.server.model.CardService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
 
 @Slf4j
 @RestController
@@ -20,14 +18,9 @@ public class BalanceRequestController {
         return "Hello, dear " + clientName + "!";
     }
 
-    @GetMapping("/hello")
-    public String getHello() {
-        return "Yo, man!";
-    }
-
     @PostMapping("/balancerequest")
     public String balanceRequestProcess(@RequestBody Request request) {
-        log.info("Server got request = " + request);
+        log.info("Got request = " + request);
         return cardService.getBalance(request.getCardPan(), request.getCardPin());
     }
 }
