@@ -1,6 +1,8 @@
 package com.github.ageresgit.server.model;
 
 
+import com.github.ageresgit.common.Response;
+
 public interface CardService {
-    String getBalance(String pan, String pin);
+    Response getBalance(String pan, String pin);
 }

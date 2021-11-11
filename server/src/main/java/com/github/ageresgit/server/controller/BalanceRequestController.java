@@ -1,6 +1,7 @@
 package com.github.ageresgit.server.controller;
 
 import com.github.ageresgit.common.Request;
+import com.github.ageresgit.common.Response;
 import com.github.ageresgit.server.model.CardService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,8 +20,10 @@ public class BalanceRequestController {
     }
 
     @PostMapping("/balancerequest")
-    public String balanceRequestProcess(@RequestBody Request request) {
-        log.info("Got request = " + request);
-        return cardService.getBalance(request.getCardPan(), request.getCardPin());
+    public Response balanceRequestProcess(@RequestBody Request request) {
+        log.info("Получен запрос: " + request);
+        Response response = cardService.getBalance(request.getCardPan(), request.getCardPin());
+        log.info("Сформирован ответ: " + response);
+        return response;
     }
 }

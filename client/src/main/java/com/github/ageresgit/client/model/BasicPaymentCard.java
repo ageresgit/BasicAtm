@@ -1,22 +1,25 @@
 package com.github.ageresgit.client.model;
 
+import lombok.NonNull;
 import lombok.Value;
 
 import java.util.regex.Pattern;
 
 @Value
 public class BasicPaymentCard implements PaymentCard {
-    private String panNumber;
-    private String pinCode;
+    @NonNull
+    String panNumber;
+    @NonNull
+    String pinCode;
 
     @Override
     public boolean isValidPan() {
-        return (panNumber != null) && (Pattern.compile("^[0-9]{16}$").matcher(panNumber).matches());
+        return Pattern.compile("^[0-9]{16}$").matcher(panNumber).matches();
     }
 
     @Override
     public boolean isValidPin() {
-        return (pinCode != null) && (Pattern.compile("^[0-9]{4}$").matcher(pinCode).matches());
+        return Pattern.compile("^[0-9]{4}$").matcher(pinCode).matches();
     }
 
     @Override
