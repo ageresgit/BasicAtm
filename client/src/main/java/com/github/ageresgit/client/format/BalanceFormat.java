@@ -10,6 +10,10 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class BalanceFormat {
+    public static final String NO_RESPONSE_MESSAGE = "Отсутствует ответ сервера!";
+    public static final String NO_CURRENCY_MESSAGE = "Полученный баланс карты не содержит валюту!";
+    public static final String NO_AMOUNT_MESSAGE = "Полученный баланс карты не содержит сумму!";
+
     private ResponseType responseType;
     private Currency currency;
     private BigDecimal amount;
@@ -24,16 +28,16 @@ public class BalanceFormat {
     }
 
     public static BalanceFormat of(Response response) {
-        ResponseType type = Optional.ofNullable(response).map(Response::getResponseType).orElseThrow(() -> new RemoteServiceException("Отсутствует ответ сервера!"));
+        ResponseType type = Optional.ofNullable(response).map(Response::getResponseType).orElseThrow(() -> new RemoteServiceException(NO_RESPONSE_MESSAGE));
         Currency currency = response.getCurrency();
         BigDecimal amount = response.getAmount();
 
         if (type.isBalanceRequired()) {
             if (Objects.isNull(currency)) {
-                throw new RemoteServiceException("Полученный баланс карты не содержит валюту");
+                throw new RemoteServiceException(NO_CURRENCY_MESSAGE);
             }
             if (Objects.isNull(amount)) {
-                throw new RemoteServiceException("Полученный баланс карты не содержит сумму");
+                throw new RemoteServiceException(NO_AMOUNT_MESSAGE);
             }
         }
 
